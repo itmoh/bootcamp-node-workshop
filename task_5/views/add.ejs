@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <div class="container">
+        <h1><%= prefix %>:<%= message %></h1>
+    </div>
+    <form action="/user" method="POST">
+        <p>
+            <label>First Name</label>
+            <input type="text" name="firstName" placeholder="Type a first name..."/>
+        </p>
+        <p>
+            <label>Last Name</label>
+            <input type="text" name="lastName" placeholder="Type a last name..."/>
+        </p>
+        <p>
+            <button type="submit" class="btn">Submit</button>
+        </p>
+    </form>
+</body>
+</html>
