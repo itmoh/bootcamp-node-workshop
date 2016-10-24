@@ -1,5 +1,5 @@
 var logger = require('./logger');
-var DB = require('./db');
+var DB = // todo: get local module 'db'
 var dataBase = new DB();
 dataBase.set('key_1', 'value_1');
 dataBase.set('key_2', 'value_2');

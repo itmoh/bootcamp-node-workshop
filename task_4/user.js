@@ -8,7 +8,7 @@ var NOT_FOUND = 404;
 
 router.route('')
     .get(function get(req, res) {
-        return User.find(req.params)
+        return // todo: request all users
             .then(function (result) {
                 res.status(OK).json({
                     status: 'success',
@@ -37,7 +37,7 @@ router.route('')
 
 router.route('/:id')
     .get(function getById(req, res) {
-        return User.findById(req.params.id)
+        return // todo: request single user
             .then(function (result) {
                 res.status(OK).json(result);
             })

@@ -28,12 +28,13 @@ const fakeStructure = {
             "lastLogin"
         ]
     }
-}
-let fakeData;
+};
+
+var fakeData;
 router.route('')
     .get(function (req, res) {
         fakeData = fakeData || (fakeData = jsf(fakeStructure));
-        res.json(fakeData);
+        // todo: response fakeData as json
     })
     .post(function (req, res) {
         fakeData = null;

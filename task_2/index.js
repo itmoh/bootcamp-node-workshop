@@ -1,31 +1,32 @@
 var http = require('http'),
-    fs = require('fs');
-through = require('through2');
+    fs = require('fs'),
+    through = require('through2');
 
-    require('dotenv').load();
+require('dotenv').load();
 
 var port = process.env.SERVER_PORT;
 var fileName = process.env.FILE_NAME;
 
-http.createServer(function (req, res) {
+function requestListener(req, res) {
     if (req.method === 'POST') {
         req.on('end', function() {
-            res.writeHead(200, {
-                'Content-Type':'application/json'
-            });
-            res.end(JSON.stringify({
-                done: true
-            }));
+            res.writeHead(200, { 'Content-Type':'application/json' });
+
+            // todo: write JSON.stringify({ done: true }) and end response
+
         });
-        var ws = fs.createWriteStream(fileName, {
-            flags: 'a'
-        });
+        var ws = /* todo: create stream for write */(fileName, { flags: 'a' });
+
         var transformStream = createTransformStream();
         req.pipe(transformStream).pipe(ws);
         return;
     }
-    res.end('send me a POST\n')
-}).listen(port);
+    res.end('send me a POST\n');
+}
+
+// todo: create server, use requestListener for handle requests and start it on port from "port" property
+
+console.log('node server running on port ' + port);
 
 function createTransformStream() {
     return through(write);
@@ -37,4 +38,3 @@ function write(buffer, encoding, next) {
     this.push(result);
     next();
 }
-console.log('node server running on port ' + port);

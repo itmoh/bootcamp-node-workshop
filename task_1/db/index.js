@@ -1,6 +1,4 @@
-var logger = require('../logger');
-
-function DB() { 
+function DB() {
     this._data = {};
 }
 
@@ -10,7 +8,7 @@ DB.prototype.get = function get(key) {
 
 DB.prototype.set= function set(key, value) {
     this._data[key] = value;
-    logger.log('data set: \nKey: ' + key + '\tValue: ' + value);
+    // todo: log any changes using logger
 };
 
 module.exports = DB;

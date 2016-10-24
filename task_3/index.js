@@ -11,16 +11,15 @@ app.locals.title = 'My App';
 var options = {
 	dotfiles: 'ignore',
 	maxAge: '1d'
-}
+};
+
 app.use('/public', express.static('public', options));
 
 app.get('/', function (req, res) {
-	res.locals.prefix = 'test';
-	res.render('index', { message: 'Hello there!' });;
+	// todo: you need to render index view with "test:Hello there!" header
 });
 
-app.use('/user', userMiddleware);
-
+// todo: use user middleware for "/user" route
 
 app.listen(port, function () {
 	console.log('Example app listening on port' + port);

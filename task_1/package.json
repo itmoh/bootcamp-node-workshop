@@ -5,7 +5,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app"
+    "start": // todo: add start script
   },
   "author": "",
   "license": "ISC"

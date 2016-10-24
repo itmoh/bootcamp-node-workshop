@@ -24,12 +24,14 @@ app.get('/', function (req, res) {
 	res.locals.prefix = 'test';
 	res.render('index', { message: 'Hello there!' });;
 });
+
 app.get('/add', function (req, res) {
 	res.locals.prefix = 'Add';
 	res.render('add', { message: 'user!' });;
-})
+});
+
 app.get('/update/:id', function (req, res) {
-	var id = req.params.id
+	var id = req.params.id;
 	var User = require('./user.model');
 	User.findById(req.params.id)
 		.then(function (result) {
@@ -39,10 +41,10 @@ app.get('/update/:id', function (req, res) {
 			message: result.fullName,
 			firstName: result.firstName,
 			lastName: result.lastName
-		});;	
+		});
 	});
 	
-});;
+});
 
 app.use('/user', userMiddleware);
 
@@ -63,7 +65,7 @@ function initStatic(app) {
 	var options = {
 		dotfiles: 'ignore',
 		maxAge: '1d'
-	}
+	};
 	app.use('/public', express.static('public', options));
 }
 

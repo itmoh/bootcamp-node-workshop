@@ -1,20 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+// todo: create schema with 'firstName', 'lastName', 'lastLogin'.
+// Mongoose should fail if 'firstName' or 'lastName' is empty.
+// fill 'lastLogin' with current date on create.
+// save items to 'users' collection
 
-var UserSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    lastLogin: {
-        type: Date,
-        default: Date.now
-    }
-}, { collection: 'user' });
+var UserSchema = new Schema();
 
 UserSchema
     .virtual('fullName')
