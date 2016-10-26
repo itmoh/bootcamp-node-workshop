@@ -224,6 +224,9 @@
 						<li>npm version</li>
 					</ul>
 				</section>
+				<section>
+					<h2>test_1</h2>
+				</section>
 			</section>
 			<section>
 				<section>
@@ -338,6 +341,9 @@
 						}).listen(3000);
 					</code>
 				</section>
+				<section>
+					<h2>test_2</h2>
+				</section>
 			</section>
 			<section>
 				<section>
@@ -407,6 +413,9 @@
 						});
 					</code>
 				</section>
+				<section>
+					<h2>test_3</h2>
+				</section>
 			</section>
 			<section>
 				<section>
@@ -417,6 +426,64 @@
 						<li>Document</li>
 						<li>Field</li>
 					</ul>
+				</section>
+				<section data-markdown>
+					<h2>Create</h2>
+					<code class="hljs" data-trim>
+					db.unicorns
+						.insert({
+							name: 'Aurora', 
+							dob: new Date(1992,2,13,7,47), 
+							loves: ['carrot','papaya'], 
+							weight: 600, 
+							gender: 'm', 
+							vampires: 63
+						});
+					</code>
+				</section>
+				<section data-markdown>
+					<h2>Find</h2>
+					<code class="hljs" data-trim>
+						db.unicorns.find({gender: 'm', weight: {$gt: 700}})
+						db.unicorns.find({gender: {$ne: 'f'}, weight: {$gte: 701}})
+						//$lt, $lte, $gt, $gte, $ne, $or
+						db.unicorns.find({
+							gender: 'f', 
+							$or: [
+								{loves: 'apple'}, 
+								{loves: 'orange'}, 
+								{weight: {$lt: 500}}
+							]})
+						//Projection
+						db.unicorns.find({vampires: {$exists: false}}, { name:1, _id: 0})
+							.skip(2)
+							.limit(5)
+							.sort({name:1})
+					</code>
+				</section>
+				<section data-markdown>
+					<h2>update</h2>
+					<code class="hljs" data-trim>
+						db.unicorns.insert({})
+						db.unicorns.insert([{}, {}])
+						db.unicorns.update(
+							{gender: 'm'},// selector
+							{
+								$set: {loves: "grape"},
+								$currentDate: {dob: true}
+							},//update
+							{
+								multi: true,
+								upsert: true
+							}
+						)
+						// remove all
+						db.unicorns.remove({})
+						// remove match condition
+						db.unicorns.remove({type: "food"})
+						// remove match condition only one
+						db.unicorns.remove({type: "food"}, 1)
+					</code>
 				</section>
 				<section>
 					<h2>ORM-way: Mongoose</h2>
@@ -475,6 +542,52 @@
 								this.members = membersArray;
 							});
 					</code>
+				</section>
+				<section data-markdown>
+					<h2>Work with model: Save</h2>
+					<code class="hljs" data-trim>
+						var newModel = new model({
+							role: 'dev',
+							members: ['user1', 'user3']
+						});
+
+						newModel.save(function (err) {
+							if (err) return handleError(err);
+							saved!
+						});
+						newModel.save()
+							.then()
+							.catch()
+					</code>
+				</section>
+				<section data-markdown>
+					<h2>Work with model: Find</h2>
+					<code class="hljs" data-trim>
+						model.find({role: 'dev'})
+							.skip(skip)
+							.limit(limit)
+						
+						model.findById(id)
+							.then(function (modelInstance) {
+								var updatedInstance = _.extend(modelInstance, req.body);
+								return updatedInstance.save();
+							})
+					</code>
+				</section>
+				<section data-markdown>
+					<h2>Work with model: Find</h2>
+					<code class="hljs" data-trim>
+						model.remove({role: 'dev'})
+
+						model.update({
+								role: 'dev'
+							}, {
+								$set: {members: ['user2']}
+							})
+					</code>
+				</section>
+				<section>
+					<h2>test_4</h2>
 				</section>
 			</section>
 			<section>
